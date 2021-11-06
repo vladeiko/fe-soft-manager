@@ -3,9 +3,7 @@ import { Router } from './components';
 import './reset.css';
 
 function App() {
-  return (
-    <Router />
-  );
+  return <Router />;
 }
 
 export default App;
