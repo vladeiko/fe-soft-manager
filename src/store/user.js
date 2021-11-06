@@ -7,7 +7,7 @@ export const signInThunk = createAsyncThunk(
   'user/signIn',
   async ({ email, password }, { fulfillWithValue, rejectWithValue }) => {
     try {
-      const { data } = await userService.signIn({ email, password });
+      const data = await userService.signIn({ email, password });
       return fulfillWithValue(data);
     } catch (error) {
       throw rejectWithValue(error);
@@ -17,7 +17,7 @@ export const signInThunk = createAsyncThunk(
 
 const initialState = {
   user: null,
-  acccess_token: null,
+  access_token: null,
   isAuthorized: false,
   isLoading: false,
 };
