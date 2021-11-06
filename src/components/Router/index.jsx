@@ -6,18 +6,22 @@ import { AuthLayout } from '../../layouts';
 import { MainLayout } from '../../layouts';
 
 import { SignInPage } from '../../pages';
-import { HomePage } from '../../pages';
+
+import { routes } from '../../constants';
 
 const Router = () => {
-  const isAuthorized = useSelector((state) => state.user.isAuthorized);
+  const isAuthorized = useSelector((state) => state.user?.isAuthorized);
+  const userSystemRole = useSelector((state) => state.user?.user?.role_sys_name);
 
   const getRoutes = useCallback(() => {
-    if (isAuthorized) {
+    if (isAuthorized && userSystemRole) {
       return (
         <>
           <Route path="/" element={<Navigate to="/home" />} />
           <Route path="/" element={<MainLayout />}>
-            <Route path="home" element={<HomePage />} />
+            {routes[userSystemRole].map((route) => (
+              <Route key={route.path} path={route.path} element={<route.component />} />
+            ))}
             <Route path="*" element={<Navigate to="/home" />} />
           </Route>
         </>

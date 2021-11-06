@@ -35,7 +35,7 @@ const userSlice = createSlice({
       state.user = action.payload.user;
       state.access_token = action.payload.access_token;
       state.isAuthorized = true;
-      storageService.setItem('auth', { isAuthorized: true, access_token: action.payload.access_token });
+      storageService.setItem('auth', { isAuthorized: true, ...action.payload });
     },
     [signInThunk.rejected]: (state, action) => {
       state.isLoading = false;
@@ -43,7 +43,7 @@ const userSlice = createSlice({
       if (action.payload.status === 400) {
         message.error(action.payload.data.error);
       }
-    }
+    },
   },
 });
 
