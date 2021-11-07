@@ -1,8 +1,23 @@
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Button, Table } from 'antd';
+
+import { getAllComputersThunk } from '../../store/computers';
+
+import { columns, addKeysToData } from './columns';
 
 import './style.scss';
 
 const ComputersListPage = () => {
+  const dispatch = useDispatch();
+
+  const isLoading = useSelector((state) => state.computers.isLoading);
+  const computers = useSelector((state) => state.computers.computers);
+
+  useEffect(() => {
+    dispatch(getAllComputersThunk());
+  }, []);
+
   return (
     <div className="computers-list">
       <div className="computers-list__title">
@@ -10,10 +25,10 @@ const ComputersListPage = () => {
         <span className="description">
           Какой-то ещё не придуманный текст, который будет отражать основную часть этой части приложения
         </span>
-        <Button type="primary" className="add-button">Добавить</Button>
+        <Button loading={isLoading} type="primary" className="add-button">Добавить</Button>
       </div>
       <div className="computers-list__table">
-        <Table />
+        <Table columns={columns} dataSource={addKeysToData(computers)} loading={isLoading} />
       </div>
     </div>
   );
