@@ -51,8 +51,20 @@ const post = (url, data, headers = {}, params = {}) => {
   });
 };
 
+function remove(url, data, headers = {}) {
+  const authHeader = getAuthHeader();
+  return http.delete(url, {
+    headers: {
+      ...authHeader,
+      ...headers,
+    },
+    data,
+  });
+}
+
 export default {
   http,
   get,
   post,
+  remove,
 };
