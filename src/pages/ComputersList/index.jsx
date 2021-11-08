@@ -26,7 +26,9 @@ const ComputersListPage = () => {
       <div className="computers-list__title">
         <span className="title">Список компьютеров</span>
         <span className="description">
-          Какой-то ещё не придуманный текст, который будет отражать основную часть этой части приложения
+          Какой-то ещё не придуманный текст, который будет отражать
+          <br />
+          основную часть этой части приложения
         </span>
         <Button loading={isLoading} type="primary" className="add-button">
           Добавить

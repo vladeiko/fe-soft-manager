@@ -43,5 +43,9 @@
 
   &__table {
     margin: 0 15px;
+
+    .delete-button {
+      cursor: pointer;
+    }
   }
 }
