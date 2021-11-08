@@ -1,4 +1,6 @@
-export const columns = [
+import { Button } from 'antd';
+
+export const getColumns = ({ handleMore, handleDelete }) => [
   {
     title: 'Номер',
     dataIndex: 'id',
@@ -18,7 +20,20 @@ export const columns = [
     title: 'MAC-адрес',
     dataIndex: 'mac_address',
     key: 'mac_address',
-  }
+  },
+  {
+    title: '',
+    render: (computer) => (
+      <div>
+        <Button type="link" onClick={handleMore(computer.id)}>
+          ПОДРОБНЕЕ
+        </Button>
+        <span className="delete-button" onClick={handleDelete(computer.id)}>
+          ❌
+        </span>
+      </div>
+    ),
+  },
 ];
 
 export const addKeysToData = (data) => data.map((item) => ({ ...item, key: item.id }));
