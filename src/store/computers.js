@@ -15,6 +15,19 @@ export const getAllComputersThunk = createAsyncThunk(
   }
 );
 
+export const deleteComputerThunk = createAsyncThunk(
+  'computers/deleteComputer',
+  async (computerId, { fulfillWithValue, rejectWithValue }) => {
+    try {
+      const data = await computersService.deleteComputer(computerId);
+      console.log(data);
+      return fulfillWithValue(data);
+    } catch (error) {
+      throw rejectWithValue(error);
+    }
+  }
+);
+
 const initialState = {
   computers: [],
   isLoading: false,
@@ -33,6 +46,17 @@ const computersSlice = createSlice({
       state.computers = action.payload.computers;
     },
     [getAllComputersThunk.rejected]: (state, action) => {
+      state.isLoading = false;
+      message.error(action.payload.data.error);
+    },
+    [deleteComputerThunk.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [deleteComputerThunk.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.computers = state.computers.filter((computer) => computer.id !== action.payload.deletedComputerId);
+    },
+    [deleteComputerThunk.rejected]: (state, action) => {
       state.isLoading = false;
       message.error(action.payload.data.error);
     },

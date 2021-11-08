@@ -1,8 +1,10 @@
-import { useEffect } from 'react';
+import { useRef, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Table } from 'antd';
 
 import { getAllComputersThunk } from '../../store/computers';
+
+import DeleteComputerModal from './DeleteComputerModal';
 
 import { getColumns, addKeysToData } from './columns';
 
@@ -10,6 +12,8 @@ import './style.scss';
 
 const ComputersListPage = () => {
   const dispatch = useDispatch();
+
+  const deleteComputerModalRef = useRef();
 
   const isLoading = useSelector((state) => state.computers.isLoading);
   const computers = useSelector((state) => state.computers.computers);
@@ -19,7 +23,7 @@ const ComputersListPage = () => {
   }, []);
 
   const handleMore = () => null;
-  const handleDelete = () => null;
+  const handleDelete = (computerId) => deleteComputerModalRef.current.openModal(computerId);
 
   return (
     <div className="computers-list">
@@ -41,6 +45,7 @@ const ComputersListPage = () => {
           loading={isLoading}
         />
       </div>
+      <DeleteComputerModal title="Удалить Компьютер" subtitle="Вы уверены?" ref={deleteComputerModalRef} />
     </div>
   );
 };

@@ -25,10 +25,10 @@ export const getColumns = ({ handleMore, handleDelete }) => [
     title: '',
     render: (computer) => (
       <div>
-        <Button type="link" onClick={handleMore(computer.id)}>
+        <Button type="link" onClick={() => handleMore(computer.id)}>
           ПОДРОБНЕЕ
         </Button>
-        <span className="delete-button" onClick={handleDelete(computer.id)}>
+        <span className="delete-button" onClick={() => handleDelete(computer.id)}>
           ❌
         </span>
       </div>

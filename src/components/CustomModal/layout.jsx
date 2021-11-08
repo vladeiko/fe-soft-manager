@@ -1,7 +1,6 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
-const CustomModalLayout = ({ title, subtitle, children, contentStyle }) => {
+const CustomModalLayout = ({ title = null, subtitle = null, children = null, contentStyle = 'antd-modal-content' }) => {
   return (
     <>
       <div className="antd-modal-header">
@@ -11,20 +10,6 @@ const CustomModalLayout = ({ title, subtitle, children, contentStyle }) => {
       <div className={contentStyle}>{children}</div>
     </>
   );
-};
-
-CustomModalLayout.propTypes = {
-  title: PropTypes.node,
-  subtitle: PropTypes.node,
-  children: PropTypes.node,
-  contentStyle: PropTypes.string,
-};
-
-CustomModalLayout.defaultProps = {
-  title: null,
-  subtitle: null,
-  children: null,
-  contentStyle: 'antd-modal-content',
 };
 
 export default CustomModalLayout;

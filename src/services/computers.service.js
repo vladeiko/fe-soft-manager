@@ -8,4 +8,14 @@ const getAllComputers = () =>
     .then(({ data }) => data)
     .catch((err) => Promise.reject(err.response));
 
-export default { getAllComputers };
+const deleteComputer = (computerId) => {
+  const params = new URLSearchParams();
+  params.append('computer_id', computerId);
+
+  return httpService
+    .remove(`${computersUrl}`, {}, {}, { params })
+    .then(({ data }) => data)
+    .catch((err) => Promise.reject(err.response));
+};
+
+export default { getAllComputers, deleteComputer };
