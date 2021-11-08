@@ -20,7 +20,6 @@ export const deleteComputerThunk = createAsyncThunk(
   async (computerId, { fulfillWithValue, rejectWithValue }) => {
     try {
       const data = await computersService.deleteComputer(computerId);
-      console.log(data);
       return fulfillWithValue(data);
     } catch (error) {
       throw rejectWithValue(error);
