@@ -13,8 +13,8 @@ export const getColumns = ({ handleMore, handleDelete }) => [
   },
   {
     title: 'Владелец',
-    dataIndex: 'owner_name',
-    key: 'owner_name',
+    dataIndex: 'owner',
+    key: 'owner',
   },
   {
     title: 'MAC-адрес',
