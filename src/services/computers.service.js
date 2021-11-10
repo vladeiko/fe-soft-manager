@@ -18,4 +18,10 @@ const deleteComputer = (computerId) => {
     .catch((err) => Promise.reject(err.response));
 };
 
-export default { getAllComputers, deleteComputer };
+const addComputer = ({ owner, mac_address, location }) =>
+  httpService
+    .post(`${computersUrl}`, { data: { owner, mac_address, location } })
+    .then(({ data }) => data)
+    .catch((err) => Promise.reject(err.response));
+
+export default { getAllComputers, deleteComputer, addComputer };

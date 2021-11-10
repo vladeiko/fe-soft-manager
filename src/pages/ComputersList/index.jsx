@@ -5,6 +5,7 @@ import { Button, Table } from 'antd';
 import { getAllComputersThunk } from '../../store/computers';
 
 import DeleteComputerModal from './DeleteComputerModal';
+import AddComputerModal from './AddComputerModal';
 
 import { getColumns, addKeysToData } from './columns';
 
@@ -14,6 +15,7 @@ const ComputersListPage = () => {
   const dispatch = useDispatch();
 
   const deleteComputerModalRef = useRef();
+  const addComputerModalRef = useRef();
 
   const isLoading = useSelector((state) => state.computers.isLoading);
   const computers = useSelector((state) => state.computers.computers);
@@ -24,6 +26,7 @@ const ComputersListPage = () => {
 
   const handleMore = () => null;
   const handleDelete = (computerId) => deleteComputerModalRef.current.openModal(computerId);
+  const handleAdd = () => addComputerModalRef.current.openModal();
 
   return (
     <div className="computers-list">
@@ -34,7 +37,7 @@ const ComputersListPage = () => {
           <br />
           основную часть этой части приложения
         </span>
-        <Button loading={isLoading} type="primary" className="add-button">
+        <Button loading={isLoading} onClick={handleAdd} type="primary" className="add-button">
           Добавить
         </Button>
       </div>
@@ -46,6 +49,7 @@ const ComputersListPage = () => {
         />
       </div>
       <DeleteComputerModal title="Удалить Компьютер" subtitle="Вы уверены?" ref={deleteComputerModalRef} />
+      <AddComputerModal title="Добавить Компьютер" subtitle="Заполните форму и нажмите ОК" ref={addComputerModalRef} />
     </div>
   );
 };
