@@ -15,5 +15,6 @@ export default {
   [accessLevels.ADMIN]: [
     { path: 'tasks', component: TasksList },
     { path: 'home', component: UsersList },
+    { path: 'users', component: UsersList },
   ],
 };
