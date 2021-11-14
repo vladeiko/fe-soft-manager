@@ -1,7 +1,7 @@
 .auth-header {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
 
   height: 40px;
   border: 1px solid rgba(170, 170, 170, 0.5);
@@ -12,5 +12,15 @@
     font-size: 20px;
     font-weight: bold;
     line-height: 23px;
+  }
+
+  &__links {
+    .link {
+      margin: 0 8px;
+
+      &__icon {
+        font-size: 24px;
+      }
+    }
   }
 }
