@@ -25,6 +25,7 @@ const AddComputerModal = ({ title, subtitle }, ref) => {
 
   const handleSubmit = async (values) => {
     await dispatch(addComputerThunk(values));
+    form.resetFields();
     setVisible(false);
   };
 

@@ -29,6 +29,7 @@ const AddSoftModal = ({ title, subtitle }, ref) => {
 
   const handleSubmit = async (values) => {
     await dispatch(addSoftThunk(values));
+    form.resetFields();
     setVisible(false);
   };
 
