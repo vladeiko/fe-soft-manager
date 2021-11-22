@@ -1,6 +1,4 @@
-import { Button } from 'antd';
-
-export const getColumns = ({ handleMore, handleDelete }) => [
+export const getColumns = ({ handleDelete }) => [
   {
     title: 'Номер',
     dataIndex: 'id',
@@ -30,9 +28,6 @@ export const getColumns = ({ handleMore, handleDelete }) => [
     title: '',
     render: (soft) => (
       <div>
-        <Button type="link" onClick={() => handleMore(soft.id)}>
-          ПОДРОБНЕЕ
-        </Button>
         <span className="delete-button" onClick={() => handleDelete(soft.id)}>
           ❌
         </span>

@@ -18,7 +18,6 @@ const SoftListPage = () => {
     dispatch(getAllSoftThunk());
   }, []);
 
-  const handleMore = () => null;
   const handleDelete = () => null;
 
   return (
@@ -36,7 +35,7 @@ const SoftListPage = () => {
       </div>
       <div className="soft-list__table">
         <Table
-          columns={getColumns({ handleMore, handleDelete })}
+          columns={getColumns({ handleDelete })}
           dataSource={addKeysToData(soft)}
           loading={isLoading}
         />
