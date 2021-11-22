@@ -1,0 +1,51 @@
+.users-list {
+  display: flex;
+  flex-direction: column;
+
+  max-width: 1120px;
+  width: 100%;
+
+  margin-top: 12px;
+  border: 1px solid #f0f0f0;
+  box-sizing: border-box;
+  border-radius: 2px;
+
+  &__title {
+    display: flex;
+    flex-direction: column;
+    max-width: 800px;
+
+    margin-top: 12px;
+    margin-left: 16px;
+
+    .title {
+      font-style: normal;
+      font-weight: bold;
+      font-size: 20px;
+
+      margin-bottom: 10px;
+    }
+
+    .description {
+      font-size: 16px;
+      line-height: 19px;
+      color: #3f3f3f;
+
+      margin-bottom: 8px;
+    }
+
+    .add-button {
+      width: 100px;
+
+      margin-bottom: 8px;
+    }
+  }
+
+  &__table {
+    margin: 0 15px;
+
+    .delete-button {
+      cursor: pointer;
+    }
+  }
+}
