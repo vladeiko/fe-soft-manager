@@ -8,13 +8,15 @@ export default {
     { path: 'tasks', component: TasksList },
   ],
   [accessLevels.MANAGER]: [
-    { path: 'tasks', component: TasksList },
     { path: 'home', component: SoftList },
+    { path: 'computers', component: ComputersList },
+    { path: 'tasks', component: TasksList },
     { path: 'users', component: UsersList },
   ],
   [accessLevels.ADMIN]: [
-    { path: 'tasks', component: TasksList },
     { path: 'home', component: UsersList },
+    { path: 'computers', component: ComputersList },
+    { path: 'tasks', component: TasksList },
     { path: 'users', component: UsersList },
   ],
 };
