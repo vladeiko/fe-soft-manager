@@ -2,9 +2,11 @@ import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { Empty } from 'antd';
+import { Empty, Button, Table } from 'antd';
 
 import { getComputerSoftThunk, getAllComputersThunk } from '../../store/computers';
+
+import { addKeysToData, getColumns } from './columns';
 
 import './style.scss';
 
@@ -13,6 +15,7 @@ const ComputerPage = () => {
 
   const { computerId } = useParams();
 
+  const computers = useSelector((state) => state.computers.computers);
   const currentComputer = useSelector((state) =>
     state.computers.computers.find((computer) => computer.id === Number(computerId))
   );
@@ -23,8 +26,10 @@ const ComputerPage = () => {
   }, [currentComputer?.id]);
 
   useEffect(() => {
-    dispatch(getAllComputersThunk());
-  }, []);
+    if (!computers.length) dispatch(getAllComputersThunk());
+  }, [computers.length]);
+
+  const handleDelete = () => null;
 
   if (!currentComputer) return <Empty />;
 
@@ -48,6 +53,17 @@ const ComputerPage = () => {
         <div className="title">Расположение: </div>
         <div className="info">{currentComputer.location}</div>
       </div>
+      {currentComputer.soft && (
+        <div className="computer-page__table">
+          <div className="table-title">
+            <span className="table-title__title">Список ПО</span>
+            <Button className="table-title__button" type="primary">
+              Добавить
+            </Button>
+          </div>
+          <Table dataSource={addKeysToData(currentComputer.soft)} columns={getColumns({ handleDelete })} />
+        </div>
+      )}
     </div>
   );
 };

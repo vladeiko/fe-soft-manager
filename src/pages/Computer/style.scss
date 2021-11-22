@@ -6,6 +6,9 @@
   width: 100%;
 
   margin-top: 12px;
+  padding-top: 12px;
+  padding-left: 16px;
+  padding-right: 16px;
   border: 1px solid #f0f0f0;
   box-sizing: border-box;
   border-radius: 2px;
@@ -15,8 +18,7 @@
     flex-direction: column;
     max-width: 800px;
 
-    margin-top: 12px;
-    margin-left: 16px;
+    margin-bottom: 48px;
 
     .title {
       font-style: normal;
@@ -48,9 +50,6 @@
     max-width: 800px;
     width: fit-content;
 
-    margin-top: 12px;
-    margin-left: 16px;
-
     .title {
       font-weight: bold;
       width: fit-content;
@@ -61,10 +60,28 @@
       width: fit-content;
       color: #646464;
     }
+
+    margin-bottom: 48px;
   }
 
   &__table {
-    margin: 0 15px;
+    .table-title {
+      display: flex;
+      flex-direction: column;
+
+      margin-bottom: 12px;
+
+      &__title {
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 12px;
+      }
+
+      &__button {
+        width: 120px;
+        height: 32px;
+      }
+    }
 
     .delete-button {
       cursor: pointer;
