@@ -1,0 +1,90 @@
+.computer-page {
+  display: flex;
+  flex-direction: column;
+
+  max-width: 1120px;
+  width: 100%;
+
+  margin-top: 12px;
+  padding-top: 12px;
+  padding-left: 16px;
+  padding-right: 16px;
+  border: 1px solid #f0f0f0;
+  box-sizing: border-box;
+  border-radius: 2px;
+
+  &__title {
+    display: flex;
+    flex-direction: column;
+    max-width: 800px;
+
+    margin-bottom: 48px;
+
+    .title {
+      font-style: normal;
+      font-weight: bold;
+      font-size: 20px;
+
+      margin-bottom: 10px;
+    }
+
+    .description {
+      font-size: 16px;
+      line-height: 19px;
+      color: #3f3f3f;
+
+      margin-bottom: 8px;
+    }
+
+    .add-button {
+      width: 100px;
+
+      margin-bottom: 8px;
+    }
+  }
+
+  &__info {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 4px 8px;
+    max-width: 800px;
+    width: fit-content;
+
+    .title {
+      font-weight: bold;
+      width: fit-content;
+    }
+
+    .info {
+      text-align: left;
+      width: fit-content;
+      color: #646464;
+    }
+
+    margin-bottom: 48px;
+  }
+
+  &__table {
+    .table-title {
+      display: flex;
+      flex-direction: column;
+
+      margin-bottom: 12px;
+
+      &__title {
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 12px;
+      }
+
+      &__button {
+        width: 120px;
+        height: 32px;
+      }
+    }
+
+    .delete-button {
+      cursor: pointer;
+    }
+  }
+}

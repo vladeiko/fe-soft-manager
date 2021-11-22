@@ -25,7 +25,15 @@ const initialState = {
 const userSlice = createSlice({
   name: 'user',
   initialState,
-  reducers: {},
+  reducers: {
+    logout: (state) => {
+      state.user = null;
+      state.access_token = null;
+      state.isAuthorized = null;
+      state.isLoading = false;
+      storageService.clearStorage();
+    },
+  },
   extraReducers: {
     [signInThunk.pending]: (state) => {
       state.isLoading = true;

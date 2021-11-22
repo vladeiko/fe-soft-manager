@@ -39,6 +39,42 @@ export const addComputerThunk = createAsyncThunk(
   }
 );
 
+export const getComputerSoftThunk = createAsyncThunk(
+  'computers/getComputerSoft',
+  async (computerId, { fulfillWithValue, rejectWithValue }) => {
+    try {
+      const data = await computersService.getComputerSoft({ computerId });
+      return fulfillWithValue({ computerId, soft: data.soft });
+    } catch (error) {
+      throw rejectWithValue(error);
+    }
+  }
+);
+
+export const removeSoftFromComputerThunk = createAsyncThunk(
+  'computers/removeSoftFromComputer',
+  async ({ computerId, softId }, { fulfillWithValue, rejectWithValue }) => {
+    try {
+      const data = await computersService.removeSoftFromComputer(computerId, softId);
+      return fulfillWithValue({ computerId, removedSoftId: data.removedSoftId });
+    } catch (error) {
+      throw rejectWithValue(error);
+    }
+  }
+);
+
+export const addSoftToComputerThunk = createAsyncThunk(
+  'computers/addComputer',
+  async ({ computer_id, soft_id }, { fulfillWithValue, rejectWithValue }) => {
+    try {
+      const data = await computersService.addSoftToComputer({ computer_id, soft_id });
+      return fulfillWithValue({ computerId: computer_id, addedSoft: data.addedSoft });
+    } catch (error) {
+      throw rejectWithValue(error);
+    }
+  }
+);
+
 const initialState = {
   computers: [],
   isLoading: false,
@@ -79,6 +115,54 @@ const computersSlice = createSlice({
       state.computers.push(action.payload.computer);
     },
     [addComputerThunk.rejected]: (state, action) => {
+      state.isLoading = false;
+      message.error(action.payload.data.error);
+    },
+    [getComputerSoftThunk.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [getComputerSoftThunk.fulfilled]: (state, action) => {
+      state.isLoading = false;
+
+      const index = state.computers.findIndex((computer) => computer.id === action.payload.computerId);
+
+      if (index > -1) {
+        state.computers[index].soft = action.payload.soft;
+      }
+    },
+    [getComputerSoftThunk.rejected]: (state, action) => {
+      state.isLoading = false;
+      message.error(action.payload.data.error);
+    },
+    [removeSoftFromComputerThunk.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [removeSoftFromComputerThunk.fulfilled]: (state, action) => {
+      state.isLoading = false;
+
+      const index = state.computers.findIndex((computer) => computer.id === action.payload.computerId);
+
+      if (index > -1) {
+        state.computers[index].soft = state.computers[index].soft.filter((soft) => soft.id !== action.payload.removedSoftId);
+      }
+    },
+    [removeSoftFromComputerThunk.rejected]: (state, action) => {
+      state.isLoading = false;
+      message.error(action.payload.data.error);
+    },
+    [addSoftToComputerThunk.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [addSoftToComputerThunk.fulfilled]: (state, action) => {
+      state.isLoading = false;
+
+      const index = state.computers.findIndex((computer) => computer.id === action.payload.computerId);
+
+      if (index > -1) {
+        state.computers[index].soft.push(action.payload.addedSoft);
+      }
+    },
+    [addSoftToComputerThunk.rejected]: (state, action) => {
       state.isLoading = false;
       message.error(action.payload.data.error);
     },

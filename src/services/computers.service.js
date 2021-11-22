@@ -24,4 +24,33 @@ const addComputer = ({ owner, mac_address, location }) =>
     .then(({ data }) => data)
     .catch((err) => Promise.reject(err.response));
 
-export default { getAllComputers, deleteComputer, addComputer };
+const getComputerSoft = ({ computerId }) =>
+  httpService
+    .get(`${computersUrl}/${computerId}/soft`)
+    .then(({ data }) => data)
+    .catch((err) => Promise.reject(err));
+
+const removeSoftFromComputer = (computerId, softId) => {
+  const params = new URLSearchParams();
+  params.append('soft_id', softId);
+
+  return httpService
+    .remove(`${computersUrl}/${computerId}/soft`, {}, {}, { params })
+    .then(({ data }) => data)
+    .catch((err) => Promise.reject(err.response));
+};
+
+const addSoftToComputer = ({ computer_id, soft_id }) =>
+  httpService
+    .post(`${computersUrl}/soft`, { data: { computer_id, soft_id } })
+    .then(({ data }) => data)
+    .catch((err) => Promise.reject(err.response));
+
+export default {
+  getAllComputers,
+  deleteComputer,
+  addComputer,
+  getComputerSoft,
+  removeSoftFromComputer,
+  addSoftToComputer,
+};

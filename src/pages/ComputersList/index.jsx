@@ -1,5 +1,6 @@
 import { useRef, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router';
 import { Button, Table } from 'antd';
 
 import { getAllComputersThunk } from '../../store/computers';
@@ -13,6 +14,7 @@ import './style.scss';
 
 const ComputersListPage = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const deleteComputerModalRef = useRef();
   const addComputerModalRef = useRef();
@@ -24,7 +26,7 @@ const ComputersListPage = () => {
     dispatch(getAllComputersThunk());
   }, []);
 
-  const handleMore = () => null;
+  const handleMore = (computerId) => navigate(`/computers/${computerId}`);
   const handleDelete = (computerId) => deleteComputerModalRef.current.openModal(computerId);
   const handleAdd = () => addComputerModalRef.current.openModal();
 

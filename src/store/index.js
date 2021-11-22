@@ -2,8 +2,9 @@ import { configureStore } from '@reduxjs/toolkit';
 
 import { storageService } from '../services';
 
-import user from './user';
 import computers from './computers';
+import soft from './soft';
+import user from './user';
 
 const preloadedState = {
   user: storageService.getItem('auth') || undefined,
@@ -11,8 +12,9 @@ const preloadedState = {
 
 export const store = configureStore({
   reducer: {
-    user,
     computers,
+    soft,
+    user,
   },
   preloadedState,
 });

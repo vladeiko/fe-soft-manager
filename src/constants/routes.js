@@ -1,19 +1,20 @@
 import accessLevels from './accessLevels';
 
-import { ComputersList, SoftList, TasksList, UsersList } from '../pages';
+import { SoftList, UsersList } from '../pages';
+import { ComputersModule } from '../modules';
 
 export default {
   [accessLevels.SYS_ADMIN]: [
-    { path: 'home', component: ComputersList },
-    { path: 'tasks', component: TasksList },
+    { path: 'home', component: ComputersModule },
   ],
   [accessLevels.MANAGER]: [
-    { path: 'tasks', component: TasksList },
     { path: 'home', component: SoftList },
+    { path: 'computers/*', component: ComputersModule },
     { path: 'users', component: UsersList },
   ],
   [accessLevels.ADMIN]: [
-    { path: 'tasks', component: TasksList },
     { path: 'home', component: UsersList },
+    { path: 'computers', component: ComputersModule },
+    { path: 'users', component: UsersList },
   ],
 };
