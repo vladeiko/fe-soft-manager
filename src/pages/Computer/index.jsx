@@ -7,6 +7,7 @@ import { Empty, Button, Table } from 'antd';
 import { getComputerSoftThunk, getAllComputersThunk } from '../../store/computers';
 
 import RemoveSoftModal from './RemoveSoftModal';
+import AddSoftModal from './AddSoftModal';
 
 import { addKeysToData, getColumns } from './columns';
 
@@ -18,6 +19,7 @@ const ComputerPage = () => {
   const { computerId } = useParams();
 
   const removeSoftModalRef = useRef();
+  const addSoftModalRef = useRef();
 
   const computers = useSelector((state) => state.computers.computers);
   const currentComputer = useSelector((state) =>
@@ -33,6 +35,7 @@ const ComputerPage = () => {
   }, [computers.length]);
 
   const handleDelete = (softId) => removeSoftModalRef.current.openModal(softId);
+  const handleAdd = () => addSoftModalRef.current.openModal();
 
   if (!currentComputer) return <Empty />;
 
@@ -60,7 +63,7 @@ const ComputerPage = () => {
         <div className="computer-page__table">
           <div className="table-title">
             <span className="table-title__title">Список ПО</span>
-            <Button className="table-title__button" type="primary">
+            <Button className="table-title__button" type="primary" onClick={handleAdd}>
               Добавить
             </Button>
           </div>
@@ -72,6 +75,12 @@ const ComputerPage = () => {
         subtitle="Вы уверены?"
         computerId={currentComputer?.id}
         ref={removeSoftModalRef}
+      />
+      <AddSoftModal
+        title="Добавить ПО к компьютеру"
+        subtitle="Выберите ПО и нажмите ОК"
+        ref={addSoftModalRef}
+        currentComputer={currentComputer}
       />
     </div>
   );

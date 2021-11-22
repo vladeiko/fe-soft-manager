@@ -40,4 +40,17 @@ const removeSoftFromComputer = (computerId, softId) => {
     .catch((err) => Promise.reject(err.response));
 };
 
-export default { getAllComputers, deleteComputer, addComputer, getComputerSoft, removeSoftFromComputer };
+const addSoftToComputer = ({ computer_id, soft_id }) =>
+  httpService
+    .post(`${computersUrl}/soft`, { data: { computer_id, soft_id } })
+    .then(({ data }) => data)
+    .catch((err) => Promise.reject(err.response));
+
+export default {
+  getAllComputers,
+  deleteComputer,
+  addComputer,
+  getComputerSoft,
+  removeSoftFromComputer,
+  addSoftToComputer,
+};
