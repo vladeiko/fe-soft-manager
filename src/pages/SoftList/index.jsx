@@ -5,6 +5,7 @@ import { Button, Table } from 'antd';
 import { getAllSoftThunk } from '../../store/soft';
 
 import DeleteSoftModal from './DeleteSoftModal';
+import AddSoftModal from './AddSoftModal';
 
 import { getColumns, addKeysToData } from './columns';
 
@@ -14,6 +15,7 @@ const SoftListPage = () => {
   const dispatch = useDispatch();
 
   const deleteSoftModalRef = useRef();
+  const addSoftModalRef = useRef();
 
   const isLoading = useSelector((state) => state.soft.isLoading);
   const soft = useSelector((state) => state.soft.soft);
@@ -23,6 +25,7 @@ const SoftListPage = () => {
   }, []);
 
   const handleDelete = (softId) => deleteSoftModalRef.current.openModal(softId);
+  const handleAdd = (softId) => addSoftModalRef.current.openModal(softId);
 
   return (
     <div className="soft-list">
@@ -33,18 +36,15 @@ const SoftListPage = () => {
           <br />
           основную часть этой части приложения
         </span>
-        <Button loading={isLoading} onClick={() => null} type="primary" className="add-button">
+        <Button loading={isLoading} onClick={handleAdd} type="primary" className="add-button">
           Добавить
         </Button>
       </div>
       <div className="soft-list__table">
-        <Table
-          columns={getColumns({ handleDelete })}
-          dataSource={addKeysToData(soft)}
-          loading={isLoading}
-        />
+        <Table columns={getColumns({ handleDelete })} dataSource={addKeysToData(soft)} loading={isLoading} />
       </div>
       <DeleteSoftModal title="Удалить ПО" subtitle="Вы уверены?" ref={deleteSoftModalRef} />
+      <AddSoftModal title="Добавить ПО" subtitle="Заполните форму" ref={addSoftModalRef} />
     </div>
   );
 };
