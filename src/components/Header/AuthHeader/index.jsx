@@ -1,15 +1,25 @@
 import { useMemo } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+
+import { Button } from 'antd';
+
+import { actions } from '../../../store/user';
 
 import { links } from '../../../constants';
 
 import './style.scss';
 
 const AuthHeader = () => {
+  const dispatch = useDispatch();
+
   const userRole = useSelector((store) => store.user.user.role_sys_name);
 
   const userLinks = useMemo(() => links[userRole], [userRole]);
+
+  const handleLogout = async () => {
+    dispatch(actions.logout());
+  };
 
   return (
     <div className="auth-header">
@@ -21,6 +31,7 @@ const AuthHeader = () => {
           </Link>
         ))}
       </div>
+      <Button onClick={handleLogout} type="link">Выйти</Button>
     </div>
   );
 };
