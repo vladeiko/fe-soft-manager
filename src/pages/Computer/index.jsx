@@ -1,10 +1,12 @@
-import { useEffect } from 'react';
+import { useRef, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { Empty, Button, Table } from 'antd';
 
 import { getComputerSoftThunk, getAllComputersThunk } from '../../store/computers';
+
+import RemoveSoftModal from './RemoveSoftModal';
 
 import { addKeysToData, getColumns } from './columns';
 
@@ -15,11 +17,12 @@ const ComputerPage = () => {
 
   const { computerId } = useParams();
 
+  const removeSoftModalRef = useRef();
+
   const computers = useSelector((state) => state.computers.computers);
   const currentComputer = useSelector((state) =>
     state.computers.computers.find((computer) => computer.id === Number(computerId))
   );
-  console.log(currentComputer);
 
   useEffect(() => {
     if (currentComputer?.id) dispatch(getComputerSoftThunk(currentComputer.id));
@@ -29,7 +32,7 @@ const ComputerPage = () => {
     if (!computers.length) dispatch(getAllComputersThunk());
   }, [computers.length]);
 
-  const handleDelete = () => null;
+  const handleDelete = (softId) => removeSoftModalRef.current.openModal(softId);
 
   if (!currentComputer) return <Empty />;
 
@@ -64,6 +67,12 @@ const ComputerPage = () => {
           <Table dataSource={addKeysToData(currentComputer.soft)} columns={getColumns({ handleDelete })} />
         </div>
       )}
+      <RemoveSoftModal
+        title="Удалить ПО с компьютера?"
+        subtitle="Вы уверены?"
+        computerId={currentComputer?.id}
+        ref={removeSoftModalRef}
+      />
     </div>
   );
 };

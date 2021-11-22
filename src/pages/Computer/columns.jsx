@@ -26,9 +26,9 @@ export const getColumns = ({ handleDelete }) => [
   },
   {
     title: '',
-    render: (computer) => (
+    render: (soft) => (
       <div>
-        <span className="delete-button" onClick={() => handleDelete(computer.id)}>
+        <span className="delete-button" onClick={() => handleDelete(soft.id)}>
           ❌
         </span>
       </div>

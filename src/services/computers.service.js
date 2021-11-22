@@ -30,4 +30,14 @@ const getComputerSoft = ({ computerId }) =>
     .then(({ data }) => data)
     .catch((err) => Promise.reject(err));
 
-export default { getAllComputers, deleteComputer, addComputer, getComputerSoft };
+const removeSoftFromComputer = (computerId, softId) => {
+  const params = new URLSearchParams();
+  params.append('soft_id', softId);
+
+  return httpService
+    .remove(`${computersUrl}/${computerId}/soft`, {}, {}, { params })
+    .then(({ data }) => data)
+    .catch((err) => Promise.reject(err.response));
+};
+
+export default { getAllComputers, deleteComputer, addComputer, getComputerSoft, removeSoftFromComputer };

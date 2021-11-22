@@ -51,6 +51,18 @@ export const getComputerSoftThunk = createAsyncThunk(
   }
 );
 
+export const removeSoftFromComputerThunk = createAsyncThunk(
+  'computers/removeSoftFromComputer',
+  async ({ computerId, softId }, { fulfillWithValue, rejectWithValue }) => {
+    try {
+      const data = await computersService.removeSoftFromComputer(computerId, softId);
+      return fulfillWithValue({ computerId, removedSoftId: data.removedSoftId });
+    } catch (error) {
+      throw rejectWithValue(error);
+    }
+  }
+);
+
 const initialState = {
   computers: [],
   isLoading: false,
@@ -107,6 +119,22 @@ const computersSlice = createSlice({
       }
     },
     [getComputerSoftThunk.rejected]: (state, action) => {
+      state.isLoading = false;
+      message.error(action.payload.data.error);
+    },
+    [removeSoftFromComputerThunk.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [removeSoftFromComputerThunk.fulfilled]: (state, action) => {
+      state.isLoading = false;
+
+      const index = state.computers.findIndex((computer) => computer.id === action.payload.computerId);
+
+      if (index > -1) {
+        state.computers[index].soft = state.computers[index].soft.filter((soft) => soft.id !== action.payload.removedSoftId);
+      }
+    },
+    [removeSoftFromComputerThunk.rejected]: (state, action) => {
       state.isLoading = false;
       message.error(action.payload.data.error);
     },
