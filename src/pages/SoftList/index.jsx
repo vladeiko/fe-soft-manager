@@ -1,8 +1,10 @@
-import { useEffect } from 'react';
+import { useRef, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Table } from 'antd';
 
 import { getAllSoftThunk } from '../../store/soft';
+
+import DeleteSoftModal from './DeleteSoftModal';
 
 import { getColumns, addKeysToData } from './columns';
 
@@ -11,6 +13,8 @@ import './style.scss';
 const SoftListPage = () => {
   const dispatch = useDispatch();
 
+  const deleteSoftModalRef = useRef();
+
   const isLoading = useSelector((state) => state.soft.isLoading);
   const soft = useSelector((state) => state.soft.soft);
 
@@ -18,7 +22,7 @@ const SoftListPage = () => {
     dispatch(getAllSoftThunk());
   }, []);
 
-  const handleDelete = () => null;
+  const handleDelete = (softId) => deleteSoftModalRef.current.openModal(softId);
 
   return (
     <div className="soft-list">
@@ -40,6 +44,7 @@ const SoftListPage = () => {
           loading={isLoading}
         />
       </div>
+      <DeleteSoftModal title="Удалить ПО" subtitle="Вы уверены?" ref={deleteSoftModalRef} />
     </div>
   );
 };
