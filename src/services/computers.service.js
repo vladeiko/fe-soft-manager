@@ -24,4 +24,10 @@ const addComputer = ({ owner, mac_address, location }) =>
     .then(({ data }) => data)
     .catch((err) => Promise.reject(err.response));
 
-export default { getAllComputers, deleteComputer, addComputer };
+const getComputerSoft = ({ computerId }) =>
+  httpService
+    .get(`${computersUrl}/${computerId}/soft`)
+    .then(({ data }) => data)
+    .catch((err) => Promise.reject(err));
+
+export default { getAllComputers, deleteComputer, addComputer, getComputerSoft };
