@@ -54,10 +54,8 @@ const ComputerPage = () => {
         <div className="info">{currentComputer.location}</div>
         <div className="title">Владелец: </div>
         <div className="info">{currentComputer.owner}</div>
-        <div className="title">Расположение: </div>
-        <div className="info">{currentComputer.location}</div>
-        <div className="title">Расположение: </div>
-        <div className="info">{currentComputer.location}</div>
+        <div className="title">MAC-адрес: </div>
+        <div className="info">{currentComputer.mac_address}</div>
       </div>
       {currentComputer.soft && (
         <div className="computer-page__table">
