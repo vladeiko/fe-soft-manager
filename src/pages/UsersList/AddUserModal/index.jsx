@@ -29,14 +29,15 @@ const AddUserModal = ({ title, subtitle, setUsers }, ref) => {
 
   return (
     <CustomModal visible={visible} onOk={handleOk} onCancel={handleCancel} title={title} subtitle={subtitle}>
-      <Form form={form} layout="vertical" className="sign-in-form" onFinish={handleSubmit}>
+      <Form form={form} layout="vertical" className="sign-in-form" onFinish={handleSubmit} validateTrigger="onSubmit">
         <Form.Item
           name="name"
-          label="Имя"
+          label="ФИО"
           rules={[
             {
               required: true,
-              message: 'Please input name!',
+              pattern: /([a-zA-Zа-яА-ЯеЁ-])+ ([a-zA-Zа-яА-ЯеЁ])+ ([a-zA-Zа-яА-ЯеЁ])+/,
+              message: 'Please input valid name!',
             },
           ]}>
           <Input placeholder="Сейт-Акаев Руслан Игремович" />
@@ -47,7 +48,8 @@ const AddUserModal = ({ title, subtitle, setUsers }, ref) => {
           rules={[
             {
               required: true,
-              message: 'Please input your username!',
+              type: 'email',
+              message: 'Please input valid email!',
             },
           ]}>
           <Input placeholder="E-mail" />
@@ -58,7 +60,9 @@ const AddUserModal = ({ title, subtitle, setUsers }, ref) => {
           rules={[
             {
               required: true,
-              message: 'Please input your password!',
+              min: 6,
+              max: 32,
+              message: 'Please input valid password!',
             },
           ]}>
           <Input.Password />

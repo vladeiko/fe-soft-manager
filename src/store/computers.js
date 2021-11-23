@@ -64,7 +64,7 @@ export const removeSoftFromComputerThunk = createAsyncThunk(
 );
 
 export const addSoftToComputerThunk = createAsyncThunk(
-  'computers/addComputer',
+  'computers/addSoftToComputer',
   async ({ computer_id, soft_id }, { fulfillWithValue, rejectWithValue }) => {
     try {
       const data = await computersService.addSoftToComputer({ computer_id, soft_id });

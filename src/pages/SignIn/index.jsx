@@ -20,14 +20,14 @@ const SignInPage = () => {
         <span className="description__title">Войти</span>
         <span className="description__note">Добро пожаловать! Войдите, чтобы продолжить</span>
       </div>
-      <Form layout="vertical" className="sign-in-form" onFinish={handleSubmit}>
+      <Form layout="vertical" className="sign-in-form" onFinish={handleSubmit} validateTrigger="onSubmit">
         <Form.Item
           name="email"
           label="E-mail"
           rules={[
             {
               required: true,
-              message: 'Please input your username!',
+              message: 'Please input valid your username!',
             },
           ]}>
           <Input placeholder="E-mail" />
@@ -38,7 +38,7 @@ const SignInPage = () => {
           rules={[
             {
               required: true,
-              message: 'Please input your password!',
+              message: 'Please input valid your password!',
             },
           ]}>
           <Input.Password />

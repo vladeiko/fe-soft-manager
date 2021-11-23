@@ -33,14 +33,14 @@ const AddComputerModal = ({ title, subtitle }, ref) => {
 
   return (
     <CustomModal visible={visible} onOk={handleOk} onCancel={handleCancel} title={title} subtitle={subtitle}>
-      <Form form={form} layout="vertical" className="sign-in-form" onFinish={handleSubmit}>
+      <Form form={form} layout="vertical" className="sign-in-form" onFinish={handleSubmit} validateTrigger="onSubmit">
         <Form.Item
           name="location"
           label="Расположение"
           rules={[
             {
               required: true,
-              message: 'Please input location!',
+              message: 'Please input valid location!',
             },
           ]}>
           <Input placeholder="Комната 322..." />
@@ -51,7 +51,8 @@ const AddComputerModal = ({ title, subtitle }, ref) => {
           rules={[
             {
               required: true,
-              message: 'Please input location!',
+              pattern: /([a-zA-Zа-яА-ЯеЁ-])+ ([a-zA-Zа-яА-ЯеЁ])+ ([a-zA-Zа-яА-ЯеЁ])+/,
+              message: 'Please input valid name!',
             },
           ]}>
           <Input placeholder="Василий Андреевич Иванов..." />
@@ -62,7 +63,8 @@ const AddComputerModal = ({ title, subtitle }, ref) => {
           rules={[
             {
               required: true,
-              message: 'Please input MAC-address!',
+              pattern: /([0-9a-f]{2}:){5}[0-9a-f]{2}/,
+              message: 'Please input valid MAC-address!',
             },
           ]}>
           <Input placeholder="02:11:B6:5A:AA:6P" />

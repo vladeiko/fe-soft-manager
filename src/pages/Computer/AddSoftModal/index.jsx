@@ -40,7 +40,7 @@ const AddSoftModal = ({ title, subtitle, currentComputer }, ref) => {
 
   return (
     <CustomModal visible={visible} onOk={handleOk} onCancel={handleCancel} title={title} subtitle={subtitle}>
-      <Form form={form} layout="vertical" className="sign-in-form" onFinish={handleSubmit}>
+      <Form form={form} layout="vertical" className="sign-in-form" onFinish={handleSubmit} validateTrigger="onSubmit">
         <Form.Item
           name="softId"
           label="Выберите ПО"

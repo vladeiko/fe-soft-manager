@@ -38,14 +38,14 @@ const AddSoftModal = ({ title, subtitle }, ref) => {
 
   return (
     <CustomModal visible={visible} onOk={handleOk} onCancel={handleCancel} title={title} subtitle={subtitle}>
-      <Form form={form} layout="vertical" className="sign-in-form" onFinish={handleSubmit}>
+      <Form form={form} layout="vertical" className="sign-in-form" onFinish={handleSubmit} validateTrigger="onSubmit">
         <Form.Item
           name="name"
           label="Название"
           rules={[
             {
               required: true,
-              message: 'Please input soft name!',
+              message: 'Please input valid soft name!',
             },
           ]}>
           <Input placeholder="VS Code" />
@@ -90,7 +90,7 @@ const AddSoftModal = ({ title, subtitle }, ref) => {
           rules={[
             {
               required: true,
-              message: 'Please input license_type!',
+              message: 'Please input valid license_type!',
             },
           ]}>
           <Select>

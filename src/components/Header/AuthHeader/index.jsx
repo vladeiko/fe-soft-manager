@@ -25,13 +25,15 @@ const AuthHeader = () => {
     <div className="auth-header">
       <h1 className="auth-header__title">Система Учёта ПО (Авторизован)</h1>
       <div className="auth-header__links">
-        {userLinks.map(({ path, Icon }) => (
+        {userLinks.map(({ path, Icon, name }) => (
           <Link className="link" key={path} to={path}>
-            <Icon className="link__icon" />
+            <Icon className="link__icon" /> {name}
           </Link>
         ))}
       </div>
-      <Button onClick={handleLogout} type="link">Выйти</Button>
+      <Button onClick={handleLogout} type="link">
+        Выйти
+      </Button>
     </div>
   );
 };
